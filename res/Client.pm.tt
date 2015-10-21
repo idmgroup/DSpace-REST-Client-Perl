@@ -1,0 +1,111 @@
+package DSpace::REST::Client;
+
+use strict;
+
+use Modern::Perl;
+
+use JSON;
+use Moose;
+use MooseX::Params::Validate;
+use REST::Client;
+use URI::Escape;
+
+use namespace::autoclean;
+
+has 'host'         => (is => 'ro', isa => 'Str');
+has 'client'       => (is => 'ro', lazy => 1, builder => '_build_client');
+has 'dspace_token' => (is => 'rw', isa => 'Maybe[Str]');
+
+sub _build_client {
+    my ($self) = @_;
+    my $client = REST::Client->new(
+        host => $self->host
+    );
+    return $client;
+}
+
+sub _escape_param {
+    my ($self, $param_name, $param_value) = @_;
+    my @param_values;
+    if (ref $param_value eq 'ARRAY') {
+        @param_values = @$param_value;
+    }
+    else {
+        @param_values = ($param_value);
+    }
+    my @escaped_params = map { uri_escape($param_name).'='.uri_escape($_) } @param_values;
+    return join('&', @escaped_params);
+}
+
+sub _build_url {
+    my ($self, $path, $query_params) = validated_list(
+        \@_,
+        path            => { isa => 'Str' },
+        query_params    => { isa => 'HashRef' },
+    );
+    my $url = $path;
+    my @non_empty_params = grep { defined $query_params->{$_} } keys %$query_params;
+    # turns our query_params hash (param_name => param_value) into an array of [$param_name, $param_value] pairs)
+    my @param_list = map { [$_, $query_params->{$_}] } @non_empty_params;
+    my @safe_params = map { $self->_escape_param(@{$_}) } @param_list;
+    if (@safe_params) {
+        $url .= '?'.join('&', @safe_params);
+    }
+    return $url;
+}
+
+sub _build_path {
+    my ($self, $path_pattern, $path_params) = validated_list(
+        \@_,
+        path_pattern    => { isa => 'Str' },
+        path_params     => { isa => 'HashRef' }
+    );
+    # Should really be an anonymous sub but I could not convince the e flag to accept the &$funcname syntax
+    sub escape_param_sub {
+        my ($param_name, $val) = @_;
+        die "No such param $param_name" unless (defined $val);
+        return '/'.uri_escape($val);
+    }
+
+    (my $path = $path_pattern) =~ s!/:(\w+)!escape_param_sub($1, $path_params->{$1})!eg;
+    return $path;
+}
+
+sub _handle_response {
+    my ($self, $verb, $url) = @_;
+    my $code = $self->client->responseCode();
+    if ($code < 200 || ($code >= 300 && $code < 400) || ($code >= 600) ) {
+        (my $err = $self->client->responseContent) =~ s/\n/ /g;
+        die "Unexpected response code $code for $verb $url with content $err";
+    }
+    elsif ($code == 404) {
+        die "Resource not found on the server at URL $url";
+    }
+    elsif ($code >= 400) {
+        (my $err = $self->client->responseContent) =~ s/\n/ /g;
+        die "Error while contacting the server $url: got error $code with content $err";
+    }
+    my $response_str = $self->client->responseContent;
+    my $resp_content_type = $self->client->responseHeader('Content-Type');
+    my $resp_location = $self->client->responseHeader('Location');
+
+    my $has_response = (defined $response_str && $response_str ne '');
+    if ($has_response) {
+        if (defined $resp_content_type && $resp_content_type =~ m!^application/json!) {
+            return from_json($response_str);
+        }
+        else {
+            return $response_str;
+        }
+    }
+    elsif ($code eq 201 && defined $resp_location) {
+        return $resp_location;
+    }
+    else {
+        return undef;
+    }
+}
+
+    [% generated_code %]
+
+1;
