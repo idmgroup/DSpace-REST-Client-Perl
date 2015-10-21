@@ -170,6 +170,11 @@ EOF
         \$self->dspace_token(\$result);
 EOF
             ;
+        } elsif ($method_name eq 'logout') {
+            $pre_call_code = <<EOF
+    \$all_headers->{'Content-Type'} = 'application/json';
+EOF
+            ;
         }
 
         my $fp = $full_path;
@@ -186,8 +191,9 @@ sub $decam_method_name {
         'headers' => { isa => 'HashRef', optional => 1 },
         $params_str
     );
-$pre_call_code
+
     my \$all_headers = {};
+$pre_call_code
     if (defined \$params{headers}) {
         foreach (keys \%{\$params{headers}}) {
             \$all_headers->{\$_} = \$params{headers}{\$_};

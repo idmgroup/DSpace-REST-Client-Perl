@@ -129,6 +129,7 @@ sub get_bitstream_data {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -176,6 +177,7 @@ sub add_bitstream_policy {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -219,6 +221,7 @@ sub get_bitstream_policies {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -264,6 +267,7 @@ sub update_bitstream {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -310,6 +314,7 @@ sub delete_bitstream {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -357,6 +362,7 @@ sub get_bitstream {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -405,6 +411,7 @@ sub update_bitstream_data {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -452,6 +459,7 @@ sub delete_bitstream_policy {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -501,6 +509,7 @@ sub get_bitstreams {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -551,6 +560,7 @@ sub update_community {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -598,6 +608,7 @@ sub get_community {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -645,6 +656,7 @@ sub delete_community {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -692,6 +704,7 @@ sub add_community_community {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -741,6 +754,7 @@ sub get_community_communities {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -791,6 +805,7 @@ sub add_community_collection {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -840,6 +855,7 @@ sub get_community_collections {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -891,6 +907,7 @@ sub get_top_communities {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -941,6 +958,7 @@ sub delete_community_collection {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -989,6 +1007,7 @@ sub delete_community_community {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1038,6 +1057,7 @@ sub get_communities {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1087,6 +1107,7 @@ sub create_community {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1134,6 +1155,7 @@ sub update_collection {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1180,6 +1202,7 @@ sub delete_collection {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1229,6 +1252,7 @@ sub get_collection {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1279,6 +1303,7 @@ sub delete_collection_item {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1323,6 +1348,7 @@ sub find_collection_by_name {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1368,6 +1394,7 @@ sub add_collection_item {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1417,6 +1444,7 @@ sub get_collection_items {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1468,6 +1496,7 @@ sub get_collections {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1516,6 +1545,7 @@ sub get_object {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1558,6 +1588,7 @@ sub test {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1599,6 +1630,7 @@ sub status {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1638,6 +1670,8 @@ sub login {
         'headers' => { isa => 'HashRef', optional => 1 },
         'entity' => { isa => 'Item' }
     );
+
+    my $all_headers = {};
         # Logout just in case.
         if (defined $self->dspace_token) {
             eval {
@@ -1648,7 +1682,6 @@ sub login {
         }
         # Login
 
-    my $all_headers = {};
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1691,6 +1724,8 @@ sub logout {
     );
 
     my $all_headers = {};
+    $all_headers->{'Content-Type'} = 'application/json';
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1732,6 +1767,7 @@ sub say_html_hello {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1777,6 +1813,7 @@ sub get_item {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1824,6 +1861,7 @@ sub delete_item {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1870,6 +1908,7 @@ sub update_item_metadata {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1917,6 +1956,7 @@ sub add_item_metadata {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -1963,6 +2003,7 @@ sub delete_item_metadata {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -2009,6 +2050,7 @@ sub get_item_metadata {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -2057,6 +2099,7 @@ sub get_item_bitstreams {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -2112,6 +2155,7 @@ sub add_item_bitstream {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -2165,6 +2209,7 @@ sub find_items_by_metadata_field {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -2213,6 +2258,7 @@ sub delete_item_bitstream {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
@@ -2262,6 +2308,7 @@ sub get_items {
     );
 
     my $all_headers = {};
+
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {
             $all_headers->{$_} = $params{headers}{$_};
