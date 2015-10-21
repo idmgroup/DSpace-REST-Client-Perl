@@ -4,6 +4,18 @@ use strict;
 
 use Modern::Perl;
 
+=head1 VERSION
+
+Version 3.15
+
+=head1 DESCRIPTION
+
+B<DSpace::REST::Client> - This is a REST client for DSpace.
+
+=cut
+
+our $VERSION = '0.1';
+
 use JSON;
 use Moose;
 use MooseX::Params::Validate;
