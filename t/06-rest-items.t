@@ -1,6 +1,6 @@
 #!perl -w
 use Modern::Perl;
-use Test::More skip_all => 'demo.dspace.org is unstable';
+use Test::More;
 
 # make sure we can load what we need
 BEGIN {
@@ -136,9 +136,9 @@ sub test_items {
     };
     ok($@ && ($@ =~ m/^Resource not found /), 'deleted bitstream');
     # The other bitstreams will be deleted with the item.
-#    $dspace->delete_item(item_id => $item_id);
-#    $dspace->delete_collection(collection_id => $col_id);
-#    $dspace->delete_community(community_id => $com_id);
+    $dspace->delete_item(item_id => $item_id);
+    $dspace->delete_collection(collection_id => $col_id);
+    $dspace->delete_community(community_id => $com_id);
 }
 
 $dspace->login(
