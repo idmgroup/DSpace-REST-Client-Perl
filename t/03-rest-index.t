@@ -57,12 +57,15 @@ sub test_index {
     );
     ok($token =~ m/^[-0-9A-Fa-f]+$/, "dspace token format");
 
+# Don't test the logout as it is a global logout
+if (0) {
     # logout
     $dspace->logout();
     eval {
         $dspace->logout();
     };
     ok($@ && ($@ =~ m/ 400 /), 'second logout failure');
+}
 
     # test
     my $str = $dspace->test();

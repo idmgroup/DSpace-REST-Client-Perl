@@ -153,7 +153,7 @@ clean();
 
 test_items();
 
-$dspace->logout();
+#$dspace->logout();
 
 done_testing();
 

@@ -154,18 +154,6 @@ sub traverse_methods {
         my $pre_call_code = '';
         my $post_call_code = '';
         if ($method_name eq 'login') {
-            $pre_call_code = <<EOF
-        # Logout just in case.
-        if (defined \$self->dspace_token) {
-            eval {
-                \$self->logout();
-            };
-            warn $@ if ($@);
-            \$self->dspace_token(undef);
-        }
-        # Login
-EOF
-            ;
             $post_call_code = <<EOF
         \$self->dspace_token(\$result);
 EOF

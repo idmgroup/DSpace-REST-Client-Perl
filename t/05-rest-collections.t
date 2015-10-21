@@ -116,7 +116,7 @@ clean();
 
 test_collections();
 
-$dspace->logout();
+#$dspace->logout();
 
 done_testing();
 

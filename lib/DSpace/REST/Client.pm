@@ -1672,15 +1672,6 @@ sub login {
     );
 
     my $all_headers = {};
-        # Logout just in case.
-        if (defined $self->dspace_token) {
-            eval {
-                $self->logout();
-            };
-            warn  if ();
-            $self->dspace_token(undef);
-        }
-        # Login
 
     if (defined $params{headers}) {
         foreach (keys %{$params{headers}}) {

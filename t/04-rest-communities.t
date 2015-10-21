@@ -108,7 +108,7 @@ clean();
 
 test_communities();
 
-$dspace->logout();
+#$dspace->logout();
 
 done_testing();
 
