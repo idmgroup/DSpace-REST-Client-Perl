@@ -1,6 +1,6 @@
 # DSpace::REST::Client
 
-[![Build Status](https://travis-ci.org/idmgroup/DSpace-REST-Client-Perl.svg?branch=master)](https://travis-ci.org/idmgroup/DSpace-REST-Client-Perl)
+[![Build Status](https://travis-ci.org/idmgroup/DSpace-REST-Client-Perl.svg?branch=master)](https://travis-ci.org/idmgroup/DSpace-REST-Client-Perl) [![Coverage Status](https://coveralls.io/repos/idmgroup/DSpace-REST-Client-Perl/badge.svg?branch=master&service=github)](https://coveralls.io/github/idmgroup/DSpace-REST-Client-Perl?branch=master)
 
 Perl REST Client for DSpace
 
