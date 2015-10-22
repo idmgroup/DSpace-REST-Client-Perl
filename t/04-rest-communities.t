@@ -52,12 +52,13 @@ sub cleanCommunitiesByName {
             foreach my $com (@$slice) {
                 if ($com->{name} eq $name) {
                     $dspace->delete_community(community_id => $com->{id});
+                } else {
+                    ++$offset;
                 }
             }
         } else {
             last;
         }
-        $offset += 20;
     }
 }
 
