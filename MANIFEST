@@ -1,13 +1,13 @@
 .travis.yml
 bin/wadl2perl.pl
 Build.PL
-lib/DSpace/REST/Client.pm
+lib/DSpace/REST.pm
+lib/DSpace/REST/ClientV5.pm
 LICENSE
 MANIFEST			This list of files
-META.json
-META.yml
-res/application.wadl
-res/Client.pm.tt
+README.md
+res/dspace-5_x/application.wadl
+res/dspace-5_x/Client.pm.tt
 t/00-load.t
 t/01-pod.t
 t/02-pod-coverage.t
@@ -15,6 +15,7 @@ t/03-rest-index.t
 t/04-rest-communities.t
 t/05-rest-collections.t
 t/06-rest-items.t
+t/07-client-version.t
 t/resources/com/idmgroup/brand/logo-idm_big_transparent_hd.png
 t/resources/com/idmgroup/brand/logo-idm_big_vertical_hd.png
 t/resources/com/idmgroup/brand/logo-idm_small_transparent_hd.png

@@ -52,10 +52,10 @@ SUBCLASS
 
 
 my $builder = $class->new(
-    module_name         => 'DSpace::REST::Client',
+    module_name         => 'DSpace::REST',
     license             => 'perl',
     dist_author         => q{Arnaud de Bossoreille <debossoreille@idm.fr>},
-    dist_version_from   => 'lib/DSpace/REST/Client.pm',
+    dist_version_from   => 'lib/DSpace/REST.pm',
     configure_requires => {
         'Module::Build' => 0
     },
