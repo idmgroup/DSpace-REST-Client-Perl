@@ -3,7 +3,8 @@ use strict;
 use Test::More;
 
 my @modules = qw(
-    DSpace::REST::Client
+    DSpace::REST
+    DSpace::REST::ClientV5
 );
 
 my @programs = qw(

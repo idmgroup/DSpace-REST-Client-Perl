@@ -1,4 +1,4 @@
-package DSpace::REST::Client;
+package DSpace::REST::ClientV5;
 
 use strict;
 
@@ -6,11 +6,11 @@ use Modern::Perl;
 
 =head1 VERSION
 
-Version 3.15
+Version 0.1
 
 =head1 DESCRIPTION
 
-B<DSpace::REST::Client> - This is a REST client for DSpace.
+B<DSpace::REST::ClientV5> - This is a REST client for DSpace 5_x.
 
 =cut
 

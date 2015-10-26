@@ -4,7 +4,7 @@ use Test::More;
 
 # make sure we can load what we need
 BEGIN {
-	use_ok('DSpace::REST::Client');
+	use_ok('DSpace::REST');
 }
 
 use constant {
@@ -20,7 +20,7 @@ my $hostname = `hostname`;
 chomp($hostname);
 my $FULL_TEST_COMMUNITY_NAME = _TEST_COMMUNITY_NAME."($], $hostname)";
 
-my $dspace = DSpace::REST::Client->new(
+my $dspace = DSpace::REST->new(
     'host' => DEMO_DSPACE_URL
 );
 
