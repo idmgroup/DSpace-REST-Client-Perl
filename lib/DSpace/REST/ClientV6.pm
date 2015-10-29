@@ -151,14 +151,6 @@ sub get_item_metadata {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -246,14 +238,6 @@ sub update_item_metadata {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->PUT($url, undef, $all_headers);
     my $result = $self->_handle_response('PUT', $self->host.$url);
 
@@ -293,14 +277,6 @@ sub delete_item_metadata {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->DELETE($url, $all_headers);
     my $result = $self->_handle_response('DELETE', $self->host.$url);
 
@@ -404,14 +380,6 @@ sub get_item_bitstreams {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -453,14 +421,6 @@ sub delete_item_bitstream {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->DELETE($url, $all_headers);
     my $result = $self->_handle_response('DELETE', $self->host.$url);
 
@@ -549,14 +509,6 @@ sub delete_item {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->DELETE($url, $all_headers);
     my $result = $self->_handle_response('DELETE', $self->host.$url);
 
@@ -598,14 +550,6 @@ sub get_item {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -650,14 +594,6 @@ sub get_items {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -736,14 +672,6 @@ sub logout {
             
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->POST($url, undef, $all_headers);
     my $result = $self->_handle_response('POST', $self->host.$url);
 
@@ -778,14 +706,6 @@ sub status {
             
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -820,14 +740,6 @@ sub test {
             
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -862,14 +774,6 @@ sub say_html_hello {
             
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -907,14 +811,6 @@ sub get_object {
             'expand' => $params{'expand'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -954,14 +850,6 @@ sub get_bitstream_data {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -1044,14 +932,6 @@ sub get_bitstream_policies {
             
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -1139,14 +1019,6 @@ sub delete_bitstream {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->DELETE($url, $all_headers);
     my $result = $self->_handle_response('DELETE', $self->host.$url);
 
@@ -1188,14 +1060,6 @@ sub get_bitstream {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -1285,14 +1149,6 @@ sub delete_bitstream_policy {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->DELETE($url, $all_headers);
     my $result = $self->_handle_response('DELETE', $self->host.$url);
 
@@ -1337,14 +1193,6 @@ sub get_bitstreams {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -1389,14 +1237,6 @@ sub get_top_communities {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -1442,14 +1282,6 @@ sub get_community_collections {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -1543,14 +1375,6 @@ sub get_community_communities {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -1686,14 +1510,6 @@ sub delete_community {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->DELETE($url, $all_headers);
     my $result = $self->_handle_response('DELETE', $self->host.$url);
 
@@ -1735,14 +1551,6 @@ sub get_community {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -1784,14 +1592,6 @@ sub delete_community_collection {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->DELETE($url, $all_headers);
     my $result = $self->_handle_response('DELETE', $self->host.$url);
 
@@ -1833,14 +1633,6 @@ sub delete_community_community {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->DELETE($url, $all_headers);
     my $result = $self->_handle_response('DELETE', $self->host.$url);
 
@@ -1932,14 +1724,6 @@ sub get_communities {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -1985,14 +1769,6 @@ sub get_collection_items {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -2082,14 +1858,6 @@ sub delete_collection_item {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->DELETE($url, $all_headers);
     my $result = $self->_handle_response('DELETE', $self->host.$url);
 
@@ -2124,14 +1892,6 @@ sub find_collection_by_name {
             
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->POST($url, undef, $all_headers);
     my $result = $self->_handle_response('POST', $self->host.$url);
 
@@ -2177,14 +1937,6 @@ sub get_collection {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 
@@ -2224,14 +1976,6 @@ sub delete_collection {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->DELETE($url, $all_headers);
     my $result = $self->_handle_response('DELETE', $self->host.$url);
 
@@ -2324,14 +2068,6 @@ sub get_collections {
             'xforwardedfor' => $params{'xforwardedfor'}
         }
     );
-    my $transformed_entity = $params{entity};
-    if (defined $transformed_entity) {
-        my $request_content_type = $all_headers->{'Content-Type'};
-        $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type =~ m,^application/json,) {
-            $transformed_entity = encode_json($transformed_entity);
-        }
-    }
     $self->client->GET($url, $all_headers);
     my $result = $self->_handle_response('GET', $self->host.$url);
 

@@ -133,6 +133,7 @@ sub traverse_methods {
 
         my $method_verb = $method->getAttribute('name');
 
+        my $prepare_entity = 0;
         my $request_entity = '';
         if ($method_verb eq 'PUT' || $method_verb eq 'PATCH' || $method_verb eq 'POST') {
             $request_entity = ', undef';
@@ -144,9 +145,11 @@ sub traverse_methods {
             if (defined $element && $element ne '') {
                 $element = transform_element($element);
                 push @{$subroutine->{params_strs}}, "'entity' => { isa => 'Item' }";
+                $prepare_entity = 1;
                 $request_entity = ', $transformed_entity';
             } elsif ($request_media_type eq '*/*') {
                 push @{$subroutine->{params_strs}}, "'entity' => { isa => 'Item' }";
+                $prepare_entity = 1;
                 $request_entity = ', $transformed_entity';
             }
         }
@@ -197,6 +200,9 @@ $pre_call_code
         ),
         query_params => $query_params_str
     );
+EOF
+        ;
+        print <<EOF
     my \$transformed_entity = \$params{entity};
     if (defined \$transformed_entity) {
         my \$request_content_type = \$all_headers->{'Content-Type'};
@@ -205,6 +211,9 @@ $pre_call_code
             \$transformed_entity = encode_json(\$transformed_entity);
         }
     }
+EOF
+        if ($prepare_entity);
+        print <<EOF
     \$self->client->$method_verb(\$url$request_entity, \$all_headers);
     my \$result = \$self->_handle_response('$method_verb', \$self->host.\$url);
 $post_call_code
