@@ -54,7 +54,6 @@ sub test_client {
     test_client($dspace5);
 }
 
-eval
 {
     my $dspace6 = DSpace::REST->new(
         'dspace_version' => 6.0,
@@ -62,9 +61,18 @@ eval
     );
     configure_client($dspace6);
     test_client($dspace6);
+}
+
+eval
+{
+    my $dspace7 = DSpace::REST->new(
+        'dspace_version' => 7.0,
+        'host' => DEMO_DSPACE_URL
+    );
+    configure_client($dspace7);
+    test_client($dspace7);
 };
-# TODO get the WADL from a v6 and generate ClientV6.pm.
-ok($@ && $@ =~ m/^Version 6 of DSpace REST API not supported yet/, 'v6 not supported');
+ok($@ && $@ =~ m/^Version 7 of DSpace REST API not supported yet/, 'v7 does not exist yet');
 
 done_testing();
 

@@ -25,6 +25,9 @@ sub new {
         if ($dspace_version < 6.0) {
             require DSpace::REST::ClientV5;
             return DSpace::REST::ClientV5->new($config);
+        } elsif ($dspace_version < 7.0) {
+            require DSpace::REST::ClientV6;
+            return DSpace::REST::ClientV6->new($config);
         } else {
             die "Version $dspace_version of DSpace REST API not supported yet";
         }
