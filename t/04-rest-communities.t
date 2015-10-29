@@ -13,7 +13,8 @@ use constant {
     DEMO_DSPACE_PASSWORD => 'dspace',
     DEMO_DSPACE_URL => 'https://demo.dspace.org/rest',
     TEST_COLLECTION_NAME => "Arno::db pictures",
-    _TEST_COMMUNITY_NAME => "Arno::db test"
+    _TEST_COMMUNITY_NAME => "Arno::db test",
+    TEST_UNICODE => "\x{6211}\x{662f}\x{4e2d}\x{56fd}\x{4eba}",
 };
 
 my $hostname = `hostname`;
@@ -79,7 +80,10 @@ sub test_communities {
     ok($result->{id} eq $com_id, 'get community ID');
     ok($result->{name} eq $FULL_TEST_COMMUNITY_NAME, 'get community name');
 
-    $result->{shortDescription} = 'A short description for Arno::db';
+    $result->{copyrightText} = 'Copyright with unicode '.TEST_UNICODE;
+    $result->{introductoryText} = 'An introductory text with unicode '.TEST_UNICODE;
+    $result->{shortDescription} = 'A short description for Arno::db with unicode '.TEST_UNICODE;
+    $result->{sidebarText} = 'Sidebar text with unicode '.TEST_UNICODE;
     $dspace->update_community(community_id => $com_id, entity => $result,
         headers => get_headers('application/json', 'application/json'));
 
@@ -87,7 +91,10 @@ sub test_communities {
         headers => get_headers(undef, 'application/json'));
     ok($result->{id} eq $com_id, 'get2 community ID');
     ok($result->{name} eq $FULL_TEST_COMMUNITY_NAME, 'get2 community name');
-    ok($result->{shortDescription} eq 'A short description for Arno::db', 'get2 community description');
+    ok($result->{copyrightText} eq 'Copyright with unicode '.TEST_UNICODE, 'get2 community copyright');
+    ok($result->{introductoryText} eq 'An introductory text with unicode '.TEST_UNICODE, 'get2 community introduction');
+    ok($result->{shortDescription} eq 'A short description for Arno::db with unicode '.TEST_UNICODE, 'get2 community description');
+    ok($result->{sidebarText} eq 'Sidebar text with unicode '.TEST_UNICODE, 'get2 community sidebar');
 
     $dspace->delete_community(community_id => $com_id);
     eval {

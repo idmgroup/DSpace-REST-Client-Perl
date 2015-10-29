@@ -64,5 +64,6 @@ Get it from a running DSpace instance and put it in the ``res`` directory.
 
 ```
 $ ./bin/wadl2perl.pl res/dspace-5_x/application.wadl res/dspace-5_x/Client.pm.tt >| lib/DSpace/REST/ClientV5.pm
+$ ./bin/wadl2perl.pl res/master/application.wadl res/master/Client.pm.tt >| lib/DSpace/REST/ClientV6.pm
 ```
 

@@ -201,8 +201,8 @@ $pre_call_code
     if (defined \$transformed_entity) {
         my \$request_content_type = \$all_headers->{'Content-Type'};
         \$request_content_type = '' if (!defined \$request_content_type);
-        if (\$request_content_type eq 'application/json') {
-            \$transformed_entity = to_json(\$transformed_entity);
+        if (\$request_content_type =~ m,^application/json,) {
+            \$transformed_entity = encode_json(\$transformed_entity);
         }
     }
     \$self->client->$method_verb(\$url$request_entity, \$all_headers);

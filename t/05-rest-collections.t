@@ -13,7 +13,8 @@ use constant {
     DEMO_DSPACE_PASSWORD => 'dspace',
     DEMO_DSPACE_URL => 'https://demo.dspace.org/rest',
     TEST_COLLECTION_NAME => "Arno::db pictures",
-    _TEST_COMMUNITY_NAME => "Arno::db test"
+    _TEST_COMMUNITY_NAME => "Arno::db test",
+    TEST_UNICODE => "\x{6211}\x{662f}\x{4e2d}\x{56fd}\x{4eba}",
 };
 
 my $hostname = `hostname`;
@@ -86,7 +87,10 @@ sub test_collections {
     ok($result_col->{id} eq $col_id, 'get collection ID');
     ok($result_col->{name} eq TEST_COLLECTION_NAME, 'get collection name');
 
-    $result_col->{shortDescription} = 'A short description for Arno::db pictures';
+    $result_col->{copyrightText} = 'Copyright for pictures with unicode '.TEST_UNICODE;
+    $result_col->{introductoryText} = 'An introductory text for pictures with unicode '.TEST_UNICODE;
+    $result_col->{shortDescription} = 'A short description for Arno::db pictures with unicode '.TEST_UNICODE;
+    $result_col->{sidebarText} = 'Sidebar text for pictures with unicode '.TEST_UNICODE;
     $dspace->update_collection(collection_id => $col_id, entity => $result_col,
         headers => get_headers('application/json', 'application/json'));
 
@@ -94,7 +98,10 @@ sub test_collections {
         headers => get_headers(undef, 'application/json'));
     ok($result_col->{id} eq $col_id, 'get2 collection ID');
     ok($result_col->{name} eq TEST_COLLECTION_NAME, 'get2 collection name');
-    ok($result_col->{shortDescription} eq 'A short description for Arno::db pictures', 'get2 collection description');
+    ok($result_col->{copyrightText} eq 'Copyright for pictures with unicode '.TEST_UNICODE, 'get2 collection copyright');
+    ok($result_col->{introductoryText} eq 'An introductory text for pictures with unicode '.TEST_UNICODE, 'get2 collection introduction');
+    ok($result_col->{shortDescription} eq 'A short description for Arno::db pictures with unicode '.TEST_UNICODE, 'get2 collection description');
+    ok($result_col->{sidebarText} eq 'Sidebar text for pictures with unicode '.TEST_UNICODE, 'get2 collection sidebar');
 
     $dspace->delete_collection(collection_id => $col_id);
     eval {

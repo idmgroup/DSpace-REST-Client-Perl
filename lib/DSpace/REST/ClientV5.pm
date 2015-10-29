@@ -45,7 +45,7 @@ sub _escape_param {
     else {
         @param_values = ($param_value);
     }
-    my @escaped_params = map { uri_escape($param_name).'='.uri_escape($_) } @param_values;
+    my @escaped_params = map { uri_escape_utf8($param_name).'='.uri_escape_utf8($_) } @param_values;
     return join('&', @escaped_params);
 }
 
@@ -76,7 +76,7 @@ sub _build_path {
     sub escape_param_sub {
         my ($param_name, $val) = @_;
         die "No such param $param_name" unless (defined $val);
-        return '/'.uri_escape($val);
+        return '/'.uri_escape_utf8($val);
     }
 
     (my $path = $path_pattern) =~ s!/:(\w+)!escape_param_sub($1, $path_params->{$1})!eg;
@@ -104,7 +104,7 @@ sub _handle_response {
     my $has_response = (defined $response_str && $response_str ne '');
     if ($has_response) {
         if (defined $resp_content_type && $resp_content_type =~ m!^application/json!) {
-            return from_json($response_str);
+            return decode_json($response_str);
         }
         else {
             return $response_str;
@@ -155,8 +155,8 @@ sub get_bitstream_data {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -203,8 +203,8 @@ sub add_bitstream_policy {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, $transformed_entity, $all_headers);
@@ -245,8 +245,8 @@ sub get_bitstream_policies {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -293,8 +293,8 @@ sub update_bitstream {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->PUT($url, $transformed_entity, $all_headers);
@@ -340,8 +340,8 @@ sub delete_bitstream {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->DELETE($url, $all_headers);
@@ -389,8 +389,8 @@ sub get_bitstream {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -437,8 +437,8 @@ sub update_bitstream_data {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->PUT($url, $transformed_entity, $all_headers);
@@ -486,8 +486,8 @@ sub delete_bitstream_policy {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->DELETE($url, $all_headers);
@@ -538,8 +538,8 @@ sub get_bitstreams {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -586,8 +586,8 @@ sub update_community {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->PUT($url, $transformed_entity, $all_headers);
@@ -635,8 +635,8 @@ sub get_community {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -682,8 +682,8 @@ sub delete_community {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->DELETE($url, $all_headers);
@@ -730,8 +730,8 @@ sub add_community_community {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, $transformed_entity, $all_headers);
@@ -783,8 +783,8 @@ sub get_community_communities {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -831,8 +831,8 @@ sub add_community_collection {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, $transformed_entity, $all_headers);
@@ -884,8 +884,8 @@ sub get_community_collections {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -936,8 +936,8 @@ sub get_top_communities {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -985,8 +985,8 @@ sub delete_community_collection {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->DELETE($url, $all_headers);
@@ -1034,8 +1034,8 @@ sub delete_community_community {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->DELETE($url, $all_headers);
@@ -1086,8 +1086,8 @@ sub get_communities {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -1133,8 +1133,8 @@ sub create_community {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, $transformed_entity, $all_headers);
@@ -1181,8 +1181,8 @@ sub update_collection {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->PUT($url, $transformed_entity, $all_headers);
@@ -1228,8 +1228,8 @@ sub delete_collection {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->DELETE($url, $all_headers);
@@ -1281,8 +1281,8 @@ sub get_collection {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -1330,8 +1330,8 @@ sub delete_collection_item {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->DELETE($url, $all_headers);
@@ -1372,8 +1372,8 @@ sub find_collection_by_name {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, undef, $all_headers);
@@ -1420,8 +1420,8 @@ sub add_collection_item {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, $transformed_entity, $all_headers);
@@ -1473,8 +1473,8 @@ sub get_collection_items {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -1525,8 +1525,8 @@ sub get_collections {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -1570,8 +1570,8 @@ sub get_object {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -1612,8 +1612,8 @@ sub test {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -1654,8 +1654,8 @@ sub status {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -1696,8 +1696,8 @@ sub login {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, $transformed_entity, $all_headers);
@@ -1740,8 +1740,8 @@ sub logout {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, undef, $all_headers);
@@ -1782,8 +1782,8 @@ sub say_html_hello {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -1831,8 +1831,8 @@ sub get_item {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -1878,8 +1878,8 @@ sub delete_item {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->DELETE($url, $all_headers);
@@ -1925,8 +1925,8 @@ sub update_item_metadata {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->PUT($url, undef, $all_headers);
@@ -1973,8 +1973,8 @@ sub add_item_metadata {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, $transformed_entity, $all_headers);
@@ -2020,8 +2020,8 @@ sub delete_item_metadata {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->DELETE($url, $all_headers);
@@ -2067,8 +2067,8 @@ sub get_item_metadata {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -2118,8 +2118,8 @@ sub get_item_bitstreams {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);
@@ -2178,8 +2178,8 @@ sub add_item_bitstream {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, $transformed_entity, $all_headers);
@@ -2227,8 +2227,8 @@ sub find_items_by_metadata_field {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->POST($url, $transformed_entity, $all_headers);
@@ -2276,8 +2276,8 @@ sub delete_item_bitstream {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->DELETE($url, $all_headers);
@@ -2328,8 +2328,8 @@ sub get_items {
     if (defined $transformed_entity) {
         my $request_content_type = $all_headers->{'Content-Type'};
         $request_content_type = '' if (!defined $request_content_type);
-        if ($request_content_type eq 'application/json') {
-            $transformed_entity = to_json($transformed_entity);
+        if ($request_content_type =~ m,^application/json,) {
+            $transformed_entity = encode_json($transformed_entity);
         }
     }
     $self->client->GET($url, $all_headers);

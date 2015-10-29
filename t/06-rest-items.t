@@ -13,7 +13,8 @@ use constant {
     DEMO_DSPACE_PASSWORD => 'dspace',
     DEMO_DSPACE_URL => 'https://demo.dspace.org/rest',
     TEST_COLLECTION_NAME => "Arno::db pictures",
-    _TEST_COMMUNITY_NAME => "Arno::db test"
+    _TEST_COMMUNITY_NAME => "Arno::db test",
+    TEST_UNICODE => "\x{6211}\x{662f}\x{4e2d}\x{56fd}\x{4eba}",
 };
 
 my $hostname = `hostname`;
@@ -79,11 +80,23 @@ sub create_bitstream {
     my $base_name = $res_name;
     $base_name =~ s,^.*/([^/]+)$,$1,g;
     my $content = read_bin("t/resources/$res_name");
-    my $bitstream = $dspace->add_item_bitstream(item_id => $item_id, name => $base_name, year => 2015, month => 2, day => 17, entity => $content,
+    my $bitstream = $dspace->add_item_bitstream(item_id => $item_id, name => $base_name,
+        description => TEST_UNICODE,
+        year => 2015, month => 2, day => 17, entity => $content,
         headers => get_headers(undef, 'application/json'));
     ok($bitstream->{name} eq $base_name, 'created bitstream name');
     ok($bitstream->{bundleName} eq 'ORIGINAL', 'created bitstream bundle');
-    ok($bitstream->{format} eq 'image/png', 'created bitstream format');
+    if ($base_name =~ m/\.png$/) {
+        ok($bitstream->{mimeType} eq 'image/png', 'created bitstream MIME type');
+        ok($bitstream->{format} eq 'image/png', 'created bitstream format');
+    } elsif ($base_name =~ m/\.txt$/) {
+        ok($bitstream->{mimeType} eq 'text/plain', 'created bitstream MIME type');
+        ok($bitstream->{format} eq 'Text', 'created bitstream format');
+    } else {
+        # I just don't know
+        ok($bitstream->{mimeType} eq 'application/octet-stream', 'created bitstream MIME type');
+        ok($bitstream->{format} eq 'application/octet-stream', 'created bitstream format');
+    }
     return $bitstream;
 }
 
@@ -129,6 +142,19 @@ sub test_items {
         headers => get_headers(undef, 'application/json'));
     ok($bitstream->{id} == $bs_id, 'get bitstream ID');
     ok($bitstream->{name} eq 'logo-idm_small_vertical_hd.png', 'get bitstream name');
+    ok($bitstream->{description} eq TEST_UNICODE, 'get bitstream description');
+
+    $bitstream = create_bitstream($item_id, "com/idmgroup/text/ISO-8859-15.txt");
+    my $iso_id = $bitstream->{id};
+    $bitstream = create_bitstream($item_id, "com/idmgroup/text/UTF-8.txt");
+    my $utf_id = $bitstream->{id};
+
+    my $iso = $dspace->get_bitstream_data(bitstream_id => $iso_id);
+    # "Du caf. dans une cafeti.re!" plus LF
+    ok(length($iso) == 27 + 1, 'ISO-8859-15 length');
+    my $utf = $dspace->get_bitstream_data(bitstream_id => $utf_id);
+    # 5 chinese characters plus LF
+    ok(length($utf) == 5 * 3 + 1, 'UTF-8 length');
 
     $dspace->delete_bitstream(bitstream_id => $bs_id);
     eval {
