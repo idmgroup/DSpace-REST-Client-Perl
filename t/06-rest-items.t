@@ -176,7 +176,7 @@ $dspace->login(
     headers => get_headers('application/json')
 );
 
-clean();
+#clean();
 
 test_items();
 
